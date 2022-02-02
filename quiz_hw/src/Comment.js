@@ -1,19 +1,9 @@
 import React from "react";
 import img from "./라이언.jpg";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-const Score = (props) => {
+const Comment = (props) => {
   let navigate = useNavigate();
-  const quiz_list = useSelector((state) => state.quiz.quiz_list);
-  const user_answer_list = useSelector((state) => state.quiz.user_answer_list);
-  const _score =
-    (100 / quiz_list.length) *
-    quiz_list.filter((q, idx) => {
-      return q.answer === user_answer_list[idx];
-    }).length;
-  const score = Math.round(_score);
-
   return (
     <div
       style={{
@@ -26,6 +16,13 @@ const Score = (props) => {
         boxSizing: "border-box", //테두리를 포함한 넓이가 이 요소의 넓이라고 지정
       }}
     >
+      <img
+        src={img}
+        style={{
+          width: "60vw",
+          margin: "16px",
+        }}
+      />
       <h3 style={{ fontSize: "1.5em", lineHeight: "1.5", textAlign: "center" }}>
         <span
           style={{
@@ -34,21 +31,18 @@ const Score = (props) => {
             borderRadius: "30px",
           }}
         >
-          {props.name}
+          라이언
         </span>
-        퀴즈에 대한 내 점수는{" "}
-        <span
-          style={{
-            backgroundColor: "#caecb2",
-            padding: "5px 10px",
-            borderRadius: "30px",
-          }}
-        >
-          {score}{" "}
-        </span>
-        점
+        에게 한마디
       </h3>
-      <p>우와! 우린 참 친해요!</p>
+      <input
+        style={{
+          border: "1px solid orange",
+          borderRadius: "30px",
+          padding: "10px",
+          width: "100%",
+        }}
+      />
       <button
         style={{
           padding: "10px 36px",
@@ -58,13 +52,13 @@ const Score = (props) => {
           margin: "40px",
         }}
         onClick={() => {
-          navigate("/comment");
+          navigate("/ranking");
         }}
       >
-        {props.name}에게 한 마디
+        한마디하고 랭킹 보러 가기
       </button>
     </div>
   );
 };
 
-export default Score;
+export default Comment;

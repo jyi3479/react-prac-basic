@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Quiz from "./Quiz";
 import Start from "./Start";
 import Score from "./Score";
+import Comment from "./Comment";
+import Ranking from "./Ranking";
 
 function App() {
   const [name, setName] = React.useState("라이언");
@@ -19,6 +21,8 @@ function App() {
         <Route path="/" element={<Start name={name} />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/score" element={<Score name={name} />} />
+        <Route path="/comment" element={<Comment />} />
+        <Route path="/ranking" element={<Ranking />} />
       </Routes>
     </div>
   );

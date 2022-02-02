@@ -1,9 +1,27 @@
 import React from "react";
 import img from "./라이언.jpg";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setMessage } from "./redux/modules/user";
+import { addRank } from "./redux/modules/ranking";
 
 const Comment = (props) => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const message_ref = React.useRef(null);
+  const quiz_name = useSelector((state) => state.quiz.quiz_name);
+  const user_name = useSelector((state) => state.user.user_name);
+
+  const quiz_list = useSelector((state) => state.quiz.quiz_list);
+  const user_answer_list = useSelector((state) => state.quiz.user_answer_list);
+  const _score =
+    (100 / quiz_list.length) *
+    quiz_list.filter((q, idx) => {
+      return q.answer === user_answer_list[idx];
+    }).length;
+  const score = Math.round(_score);
+
   return (
     <div
       style={{
@@ -31,11 +49,12 @@ const Comment = (props) => {
             borderRadius: "30px",
           }}
         >
-          라이언
+          {quiz_name}
         </span>
         에게 한마디
       </h3>
       <input
+        ref={message_ref}
         style={{
           border: "1px solid orange",
           borderRadius: "30px",
@@ -52,6 +71,14 @@ const Comment = (props) => {
           margin: "40px",
         }}
         onClick={() => {
+          dispatch(setMessage(message_ref.current.value));
+          dispatch(
+            addRank({
+              score: score,
+              user_name: user_name,
+              message: message_ref.current.value,
+            })
+          );
           navigate("/ranking");
         }}
       >

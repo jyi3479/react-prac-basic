@@ -8,7 +8,6 @@ import Comment from "./Comment";
 import Ranking from "./Ranking";
 
 function App() {
-  const [name, setName] = React.useState("라이언");
   return (
     <div
       className=""
@@ -18,9 +17,9 @@ function App() {
       }}
     >
       <Routes>
-        <Route path="/" element={<Start name={name} />} />
+        <Route path="/" element={<Start />} />
         <Route path="/quiz" element={<Quiz />} />
-        <Route path="/score" element={<Score name={name} />} />
+        <Route path="/score" element={<Score />} />
         <Route path="/comment" element={<Comment />} />
         <Route path="/ranking" element={<Ranking />} />
       </Routes>

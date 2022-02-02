@@ -1,13 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Ranking = (props) => {
   const navigate = useNavigate();
-  const _user_data = [
-    { score: 20, user_name: "김철수", message: "라이언 안녕!" },
-    { score: 80, user_name: "김영희", message: "라이언 안녕!" },
-    { score: 30, user_name: "김진수", message: "라이언 안녕!" },
-  ];
+  const _user_data = useSelector((state) => state.ranking.ranking);
 
   const user_data = _user_data.sort((a, b) => {
     return b.score - a.score;
@@ -25,7 +22,7 @@ const Ranking = (props) => {
           background: "#fff",
         }}
       >
-        ㅁㅁㅁㅁ 명의 사람 중에서 당신은?
+        {user_data.length} 명의 사람 중에서 당신은?
       </div>
       <div style={{ margin: "10vh 0vh" }}>
         {user_data.map((u, idx) => {

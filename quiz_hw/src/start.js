@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setName } from "./redux/modules/user";
 import styled from "styled-components";
 import img from "./라이언.jpg";
@@ -9,6 +9,7 @@ const Start = (props) => {
   const user = React.useRef(null);
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const quiz_name = useSelector((state) => state.quiz.quiz_name);
 
   return (
     <div
@@ -38,7 +39,7 @@ const Start = (props) => {
             borderRadius: "30px",
           }}
         >
-          {props.name}
+          {quiz_name}
         </span>
         에 대해 얼마나 알고 있을까?
       </h1>

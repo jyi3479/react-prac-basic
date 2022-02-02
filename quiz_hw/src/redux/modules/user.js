@@ -6,24 +6,32 @@
 
 // Actions type들을 정해주는 부분
 const SET_NAME = "user/SET_NAME";
+const SET_MESSAGE = "user/SET_MESSAGE";
 
 const initialState = {
   user_name: "",
+  user_message: "",
 };
 
 // Action Creators
-export function setName(user_name) {
-  return { type: SET_NAME, user_name };
+export function setName(name) {
+  return { type: SET_NAME, name };
 }
+
+export const setMessage = (message) => {
+  return { type: SET_MESSAGE, message };
+};
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "user/SET_NAME": {
-      // 원래 리스트에서 action에 들어간 새로운 데이터 user_name을 추가하기
-      const new_user_list = [...state.user_name, action.user_name];
-      // state의 list에 바뀐 배열로 반환
-      return { name: new_user_list };
+      return { ...state, user_name: action.name };
+    }
+
+    case "user/SET_MESSAGE": {
+      console.log(action);
+      return { ...state, user_message: action.message };
     }
 
     default:

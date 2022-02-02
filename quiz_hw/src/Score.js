@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const Score = (props) => {
   let navigate = useNavigate();
   const quiz_list = useSelector((state) => state.quiz.quiz_list);
+  const quiz_name = useSelector((state) => state.quiz.quiz_name);
   const user_answer_list = useSelector((state) => state.quiz.user_answer_list);
   const _score =
     (100 / quiz_list.length) *
@@ -34,7 +35,7 @@ const Score = (props) => {
             borderRadius: "30px",
           }}
         >
-          {props.name}
+          {quiz_name}
         </span>
         퀴즈에 대한 내 점수는{" "}
         <span
@@ -61,7 +62,7 @@ const Score = (props) => {
           navigate("/comment");
         }}
       >
-        {props.name}에게 한 마디
+        {quiz_name}에게 한 마디
       </button>
     </div>
   );

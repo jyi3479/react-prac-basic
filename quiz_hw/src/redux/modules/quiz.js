@@ -7,6 +7,7 @@
 const ADD_ANSWER = "quiz/ADD_ANSWER";
 
 const initialState = {
+  quiz_name: "라이언",
   quiz_list: [
     { question: "라이언은 네이버 캐릭터이다.", answer: false },
     { question: "라이언은 삼성 캐릭터이다.", answer: false },

@@ -8,6 +8,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
+  // component에 store 데이터를 주입해준다.
   <Provider store={store}>
     <BrowserRouter>
       <App />

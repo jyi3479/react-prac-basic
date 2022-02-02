@@ -1,41 +1,38 @@
-// bucket.js
+// quiz.js
 
-// Actions type들을 정해주는 부분
-const CREATE = "bucket/CREATE";
-const DELETE = "bucket/DELETE";
+//어떤 데이터를 넣을거야 -> 퀴즈 목록 / 유저 정답 목록
+// 어떻게 수정 해볼거야 -> 유저가 선택한 오엑스 정답을 정답 목록에 추가해줄거야
+
+// action type 지정
+const ADD_ANSWER = "quiz/ADD_ANSWER";
 
 const initialState = {
-  list: ["영화관 가기", "매일 책읽기", "수영 배우기", "코딩하기"],
+  quiz_list: [
+    { question: "라이언은 네이버 캐릭터이다.", answer: false },
+    { question: "라이언은 삼성 캐릭터이다.", answer: false },
+    { question: "라이언은 카카오 캐릭터이다.", answer: true },
+  ],
+  user_answer_list: [],
 };
 
-// Action Creators
-export function createBucket(bucket) {
-  return { type: CREATE, bucket };
-}
-
-export function deleteBucket(bucket_index) {
-  return { type: DELETE, bucket_index };
-}
+// action 생성 함수 만들기
+export const addAnswer = (user_answer) => {
+  return { type: ADD_ANSWER, user_answer };
+};
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case "bucket/CREATE": {
-      // 원래 리스트에서 action에 들어간 새로운 데이터 bucket을 추가하기
-      const new_bucket_list = [...state.list, action.bucket];
-      // state의 list에 바뀐 배열로 반환
-      return { list: new_bucket_list };
+    case "quiz/ADD_ANSWER": {
+      console.log(action);
+      const new_user_answer_list = [
+        ...state.user_answer_list,
+        action.user_answer,
+      ];
+      console.log(new_user_answer_list);
+      return { ...state, user_answer_list: new_user_answer_list };
     }
 
-    case "bucket/DELETE": {
-      // 삭제 누른 것의 index와 같지 않은(true) 요소들만 반환해주도록 filter 사용
-      const new_bucket_list = state.list.filter((l, idx) => {
-        return parseInt(action.bucket_index) !== idx;
-      });
-      // return new_bucket_list 하면 list라는 키값이 없기 때문에, 컴포넌트에서 state.list로 받아올 수 없음
-      // initialState 형식으로 반환해주기
-      return { list: new_bucket_list };
-    }
     default:
       return state;
   }

@@ -1,22 +1,15 @@
 import React from "react";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setName } from "./redux/modules/user";
-=======
->>>>>>> 6dde9817799282a4692e866623df7d6937eb9d1f
 import styled from "styled-components";
 import img from "./라이언.jpg";
 
 const Start = (props) => {
-<<<<<<< HEAD
   const user = React.useRef(null);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-=======
-  console.log(props);
->>>>>>> 6dde9817799282a4692e866623df7d6937eb9d1f
   return (
     <div
       style={{
@@ -50,10 +43,7 @@ const Start = (props) => {
         에 대해 얼마나 알고 있을까?
       </h1>
       <input
-<<<<<<< HEAD
         ref={user}
-=======
->>>>>>> 6dde9817799282a4692e866623df7d6937eb9d1f
         style={{
           border: "1px solid orange",
           borderRadius: "30px",
@@ -69,13 +59,11 @@ const Start = (props) => {
           borderRadius: "30px",
           margin: "40px",
         }}
-<<<<<<< HEAD
         onClick={() => {
+          // console.log(user.current.value);
           dispatch(setName(user.current.value));
           navigate("/quiz");
         }}
-=======
->>>>>>> 6dde9817799282a4692e866623df7d6937eb9d1f
       >
         시작하기
       </button>

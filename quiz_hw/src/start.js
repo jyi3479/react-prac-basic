@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setName } from "./redux/modules/user";
 import styled from "styled-components";
 import img from "./라이언.jpg";
 
 const Start = (props) => {
-  console.log(props);
+  const user = React.useRef(null);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -37,6 +43,7 @@ const Start = (props) => {
         에 대해 얼마나 알고 있을까?
       </h1>
       <input
+        ref={user}
         style={{
           border: "1px solid orange",
           borderRadius: "30px",
@@ -51,6 +58,10 @@ const Start = (props) => {
           border: "#ffcc6d",
           borderRadius: "30px",
           margin: "40px",
+        }}
+        onClick={() => {
+          dispatch(setName(user.current.value));
+          navigate("/quiz");
         }}
       >
         시작하기

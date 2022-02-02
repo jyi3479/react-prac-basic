@@ -11,6 +11,7 @@ import { createBucket } from "./redux/modules/bucket";
 import BucketList from "./BucketList";
 import Detail from "./Detail";
 import NotFound from "./NotFound";
+import Progress from "./Progress";
 
 function App() {
   const text = React.useRef(null);
@@ -24,13 +25,14 @@ function App() {
     // 여긴 이제 주석처리!
     // setList([...list, text.current.value]);
     console.log(text.current.value);
-    dispatch(createBucket(text.current.value));
+    dispatch(createBucket({ text: text.current.value, completed: false }));
   };
 
   return (
     <div className="App">
       <Container>
         <Title>내 버킷리스트</Title>
+        <Progress />
         <Line />
         {/* 컴포넌트를 넣어줍니다. */}
         {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
@@ -51,6 +53,13 @@ render={(props) => <BucketList list={list} />}
         <input type="text" ref={text} />
         <button onClick={addBucketList}>추가하기</button>
       </Input>
+      <button
+        onClick={() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); // (0,0) 좌료로 스크롤 해주기
+        }}
+      >
+        위로 가기
+      </button>
     </div>
   );
 }
@@ -63,6 +72,30 @@ const Input = styled.div`
   margin: 20px auto;
   border-radius: 5px;
   border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+
+  & > * {
+    padding: 5px;
+  }
+
+  & input {
+    border: 1px solid #888;
+    width: 70%;
+    margin-right: 10px;
+  }
+
+  & input:focus {
+    outline: none;
+    border: 1px solid slateblue;
+  }
+
+  & button {
+    width: 25%;
+    color: #fff;
+    border: #a673ff;
+    background: #a673ff;
+  }
 `;
 
 const Container = styled.div`

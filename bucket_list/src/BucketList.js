@@ -21,13 +21,14 @@ const BucketList = (props) => {
       {my_lists.map((list, index) => {
         return (
           <ItemStyle
+            completed={list.completed}
             className="list_item"
             key={index}
             onClick={() => {
               history("/detail/" + index);
             }}
           >
-            {list}
+            {list.text}
           </ItemStyle>
         );
       })}
@@ -38,15 +39,20 @@ const BucketList = (props) => {
 const ListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 50vh;
+  max-height: 50vh; // 최대 높이를 주면서, 스크롤이 ListStyle 안에서만 생기도록 함
   overflow-x: hidden;
+  // 속성 값을 scroll로 주면 높이가 모자라도, 미리 scroll이 생겨있다.
+  // 속성 값을 hidden으로 주면 계속 추가되어도, scroll이 생기지 않고 숨겨진 곳에서 계속 추가된다.
+  // 속성 값을 auto로 주면 높이가 모자른 경우에는 스크롤이 없고, 높이가 부족하면 scroll이 생긴다.
   overflow-y: auto;
 `;
 
 const ItemStyle = styled.div`
   padding: 16px;
   margin: 8px;
-  background-color: aliceblue;
+  background-color: ${(props) => (props.completed ? "slateblue" : "aliceblue")};
+  color: ${(props) => (props.completed ? "white" : "black")};
 `;
 
 export default BucketList;

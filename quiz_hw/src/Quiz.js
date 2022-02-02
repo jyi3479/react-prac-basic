@@ -3,6 +3,8 @@ import img from "./라이언.jpg";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addAnswer } from "./redux/modules/quiz";
+import Progress from "./Progress";
+import styled from "styled-components";
 
 const Quiz = (props) => {
   const navigate = useNavigate();
@@ -32,7 +34,8 @@ const Quiz = (props) => {
   }
 
   return (
-    <div>
+    <QuizContainer>
+      <Progress />
       <p>{user_answer_list.length + 1}번 문제</p>
       <h3>{quiz_list[user_answer_list.length].question}</h3>
       <img
@@ -60,8 +63,19 @@ const Quiz = (props) => {
           X
         </button>
       </div>
-    </div>
+    </QuizContainer>
   );
 };
+
+const QuizContainer = styled.div`
+  margin-top: 16px;
+  width: 100%;
+  & > p > span {
+    padding: 8px 16px;
+    background-color: #fef5d4;
+    // border-bottom: 3px solid #ffd6aa;
+    border-radius: 30px;
+  }
+`;
 
 export default Quiz;
